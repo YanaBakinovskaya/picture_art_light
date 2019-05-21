@@ -105,27 +105,43 @@ function calc() {
 
       totalValue.innerHTML = 0;
 
-      persons.addEventListener('change',function() {
-        personsSum = +this.value;
-        total = (daysSum + personsSum)*4000;
-        if (restDays.value == '' || persons.value == '') {
-          totalValue.innerHTML = 0;
+      persons.addEventListener('input', function() {  
+        if (this.value[0] != 0 && this.value) {
+          for (let i = 0; i < this.length; i++) {
+            this[i].value = this[i].value.replace(/-?(\d+|\d+.\d+|.)([eE][-+])?[^\d]/g, '');
+          }
+          personsSum = +this.value;
+          total = (daysSum * personsSum) * 4000 * place.options[place.selectedIndex].value;
+          if (restDays.value == '' || persons.value == '') {
+            totalValue.innerHTML = 0;
+          } else {
+            totalValue.innerHTML = total;
+            total = (daysSum * personsSum) * 4000;
+          }
         } else {
-          totalValue.innerHTML = total;
+          this.value = '';
+        }   
+      });
+
+      restDays.addEventListener('input', function() {
+        if (this.value[0] != 0 && this.value) {
+          for (let i = 0; i < this.length; i++) {
+            this[i].value = this[i].value.replace(/-?(\d+|\d+.\d+|.)([eE][-+])?[^\d]/g, '');
+          }
+          daysSum = +this.value;
+          total = (daysSum * personsSum) * 4000 * place.options[place.selectedIndex].value;
+          if (persons.value == '' || restDays.value == '') {
+            totalValue.innerHTML = 0;
+          } else {
+            totalValue.innerHTML = total;
+            total = (daysSum * personsSum) * 4000;
+          }
+        } else {
+          this.value = '';
         }
       });
 
-      restDays.addEventListener('change',function() {
-        daysSum = +this.value;
-        total = (daysSum + personsSum)*4000;
-        if (persons.value == '' || restDays.value == '') {
-          totalValue.innerHTML = 0;
-        } else {
-          totalValue.innerHTML = total;
-        }
-      });
-
-      place.addEventListener('change', function() {
+      place.addEventListener('input', function() {
         if (restDays.value == '' || persons.value == '') {
           totalValue.innerHTML = 0;
         } else {
@@ -134,13 +150,13 @@ function calc() {
         }
       });
 
-      for (let i = 0; i < counterInput.length; i++) {
-        if (counterInput[i]) {
-          counterInput[i].addEventListener('input', function () {
-            counterInput[i].value = counterInput[i].value.replace(/-?(\d+|\d+.\d+|.)([eE][-+])?[^\d]/g, '');
-          });
-        }
-      }
+      // for (let i = 0; i < counterInput.length; i++) {
+      //   if (counterInput[i]) {
+      //     counterInput[i].addEventListener('input', () => {
+      //       counterInput[i].value = counterInput[i].value.replace(/-?(\d+|\d+.\d+|.)([eE][-+])?[^\d]/g, '');
+      //     });
+      //   }
+      // }
 }
 
 module.exports = calc;
@@ -176,15 +192,19 @@ function form() {
 
   for (let i = 0; i < input.length; i++) {
     if (input[i].getAttribute('name') == 'phone') {
-      input[i].addEventListener('keypress', function () {
-        input[i].value = input[i].value.replace(/[^\+\d]/g, '');
+      input[i].addEventListener('input', () => {
+        if (input[i].value[0] != '+' ) {
+          input[i].value = '';
+        } else {
+         input[i].value = '+' + input[i].value.replace(/[^\d]/g, '');
+        }
       });
     }
   }
 
 
   function init(formElem) {
-    formElem.addEventListener('submit', function (e) {
+    formElem.addEventListener('submit', (e) => {
       e.preventDefault();
       let formData = new FormData(formElem);
       formElem.appendChild(statusMessage);
@@ -198,12 +218,12 @@ function form() {
 
 
       function postJson(json) {
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
           let request = new XMLHttpRequest();
           request.open('POST', 'server.php');
           request.setRequestHeader('Content-type', 'appLication/json; charset=utf-8');
 
-          request.addEventListener('readystatechange', function () {
+          request.addEventListener('readystatechange', () => {
             if (request.readyState < 4) {
               resolve();
             } else if (request.readyState === 4 && request.status == 200) {
@@ -251,28 +271,28 @@ function modal() {
     popup = document.querySelector('.popup'),
     close = document.querySelector('.popup-close'),
     descBtn = document.querySelectorAll('.description-btn');
-  descBtn.forEach(function (item) {
+  descBtn.forEach((item) => {
     item.classList.add('more');
   });
 
   let more = document.querySelectorAll('.more');
 
-  more.forEach(function (item) {
+  more.forEach((item) => {
     item.addEventListener('click', function () {
       overlay.style.display = 'block';
       this.classList.add('more-splash');
       document.body.style.overflow = 'hidden';
     });
 
-    close.addEventListener('click', function () {
+    close.addEventListener('click', () => {
       overlay.style.display = 'none';
       item.classList.remove('more-splash');
       document.body.style.overflow = '';
     });
 
-    overlay.addEventListener('click', function (event) {
+    overlay.addEventListener('click', (e) => {
       let target = popup;
-      if (!target.contains(event.target)) {
+      if (!target.contains(e.target)) {
         overlay.style.display = 'none';
         item.classList.remove('more-splash');
         document.body.style.overflow = '';
@@ -295,7 +315,7 @@ module.exports = modal;
 
 function scroll() {
   let navLink = document.querySelectorAll('[href^="#"]'),
-    speed = 2;
+    speed = 1;
 
   for (let i = 0; i < navLink.length; i++) {
     navLink[i].addEventListener('click', function (event) {
@@ -368,15 +388,15 @@ function slider() {
     showSlides(slideIndex = n);
   }
 
-  prev.addEventListener('click', function() {
+  prev.addEventListener('click', () => {
     plusSlides(-1);
   });
 
-  next.addEventListener('click', function() {
+  next.addEventListener('click', () => {
     plusSlides(1);
   });
 
-  dotsWrap.addEventListener('click', function(e) {
+  dotsWrap.addEventListener('click', (e) => {
     for (let i = 0; i < dots.length + 1; i++) {
       if (e.target.classList.contains('dot') && e.target == dots[i - 1]) {
         currentSlide(i);
@@ -418,8 +438,8 @@ function workWithTab(classNameParentTab, classNameTab, classNameTabContent) {
       }
     }
 
-    info.addEventListener('click', function (event) {
-      let target = event.target;
+    info.addEventListener('click', (e) => {
+      let target = e.target;
       if (target && target.classList.contains('info-header-tab')) {
         for (let i = 0; i < tab.length; i++) {
           if (target == tab[i]) {
@@ -444,7 +464,7 @@ function workWithTab(classNameParentTab, classNameTab, classNameTabContent) {
 /***/ (function(module, exports) {
 
 function timer() {
-  let deadline = '2019-04-06';
+  let deadline = '2019-05-30';
 
   function getTimeRemaining(endtime) {
     let t = Date.parse(endtime) - Date.parse(new Date()),

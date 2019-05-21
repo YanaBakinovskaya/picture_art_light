@@ -1,6 +1,6 @@
 function scroll() {
   let navLink = document.querySelectorAll('[href^="#"]'),
-    speed = 2;
+    speed = 1;
 
   for (let i = 0; i < navLink.length; i++) {
     navLink[i].addEventListener('click', function (event) {

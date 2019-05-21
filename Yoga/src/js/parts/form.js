@@ -19,15 +19,19 @@ function form() {
 
   for (let i = 0; i < input.length; i++) {
     if (input[i].getAttribute('name') == 'phone') {
-      input[i].addEventListener('keypress', function () {
-        input[i].value = input[i].value.replace(/[^\+\d]/g, '');
+      input[i].addEventListener('input', () => {
+        if (input[i].value[0] != '+' ) {
+          input[i].value = '';
+        } else {
+         input[i].value = '+' + input[i].value.replace(/[^\d]/g, '');
+        }
       });
     }
   }
 
 
   function init(formElem) {
-    formElem.addEventListener('submit', function (e) {
+    formElem.addEventListener('submit', (e) => {
       e.preventDefault();
       let formData = new FormData(formElem);
       formElem.appendChild(statusMessage);
@@ -41,12 +45,12 @@ function form() {
 
 
       function postJson(json) {
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
           let request = new XMLHttpRequest();
           request.open('POST', 'server.php');
           request.setRequestHeader('Content-type', 'appLication/json; charset=utf-8');
 
-          request.addEventListener('readystatechange', function () {
+          request.addEventListener('readystatechange', () => {
             if (request.readyState < 4) {
               resolve();
             } else if (request.readyState === 4 && request.status == 200) {

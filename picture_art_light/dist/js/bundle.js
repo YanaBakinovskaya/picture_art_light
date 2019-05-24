@@ -86,14 +86,69 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/js/parts/modal-popup-design.js":
+/*!********************************************!*\
+  !*** ./src/js/parts/modal-popup-design.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function modalPopupDesign() {
+  let btns = document.querySelectorAll('.button-design'),
+      popupDesign = document.querySelector('.popup-design'),
+      popupContent = document.querySelector('.popup-design .popup-content'),
+      popupClose = document.querySelector('.popup-design .popup-close');
+
+  console.log(popupClose);
+  btns.forEach((item) => {
+    item.addEventListener('click', () => {
+      popupDesign.style.display = 'block';
+      document.body.style.paddingRight = '17px';
+      popupContent.classList.add('headShake');
+      popupContent.classList.add('animated');
+      document.body.style.overflow = 'hidden';
+    });
+
+    popupClose.addEventListener('click', () => {
+      popupDesign.style.display = 'none';
+      popupContent.classList.remove('headShake');
+      popupContent.classList.remove('animated');
+      document.body.style.paddingRight = '0';
+      document.body.style.overflow = '';
+    });
+  });
+}
+
+module.exports = modalPopupDesign;
+
+/***/ }),
+
 /***/ "./src/js/script.js":
 /*!**************************!*\
   !*** ./src/js/script.js ***!
   \**************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
+//window.addEventListener('load');
+window.addEventListener('DOMContentLoaded', function () {
+  'use strict';
+  // let timer = require('./parts/timer.js'),
+  //     calc = require('./parts/calc.js'),
+  //     scroll = require('./parts/scroll.js'),
+  let modalPopupDesign = __webpack_require__(/*! ./parts/modal-popup-design.js */ "./src/js/parts/modal-popup-design.js");
+      // slider = require('./parts/slider.js'),
+      // form = require('./parts/form.js'),
+      // tabs = require('./parts/tabs.js');
 
+  // tabs();
+  // calc();
+  // timer();
+  // scroll();
+  modalPopupDesign();
+  // slider();
+  // form();
+});
 
 /***/ })
 

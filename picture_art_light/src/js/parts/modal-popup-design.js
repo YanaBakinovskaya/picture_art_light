@@ -4,7 +4,6 @@ function modalPopupDesign() {
       popupContent = document.querySelector('.popup-design .popup-content'),
       popupClose = document.querySelector('.popup-design .popup-close');
 
-  console.log(popupClose);
   btns.forEach((item) => {
     item.addEventListener('click', () => {
       popupDesign.style.display = 'block';

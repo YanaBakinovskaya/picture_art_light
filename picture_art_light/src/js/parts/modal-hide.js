@@ -1,7 +1,6 @@
 function hideModal(overlay, popup) {
-  //overlay.style.display = 'none';
-  overlay.classList.remove('show-modal');
-  document.body.classList.remove('show');
+  overlay.classList.remove('show');
+  document.body.classList.remove('open');
   popup.classList.remove('headShake','animated');
 }
 module.exports = hideModal;

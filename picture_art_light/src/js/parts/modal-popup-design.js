@@ -8,11 +8,11 @@ function modalPopupDesign() {
 
   btns.forEach((item) => {
     item.addEventListener('click', () => {
-      showModal(overlay,popup);
+      showModal(overlay, popup);
     });
 
     popupClose.addEventListener('click', () => {
-      hideModal(overlay,popup);
+      hideModal(overlay, popup);
     });
   });
 }

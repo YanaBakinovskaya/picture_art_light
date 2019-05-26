@@ -1750,10 +1750,13 @@ h4 {
     width: 25rem;
   }
 }
-.show {
+.open {
   overflow: hidden;
   padding-right: 17px;
 }
-.show-modal {
+.show {
   display: block;
+}
+.hide {
+  display: none;
 }

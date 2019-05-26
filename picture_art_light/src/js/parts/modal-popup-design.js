@@ -2,23 +2,17 @@ function modalPopupDesign() {
   let btns = document.querySelectorAll('.button-design'),
       popupDesign = document.querySelector('.popup-design'),
       popupContent = document.querySelector('.popup-design .popup-content'),
-      popupClose = document.querySelector('.popup-design .popup-close');
+      popupClose = document.querySelector('.popup-design .popup-close'),
+      showModal = require('./modal-show.js'),
+      hideModal = require('./modal-hide.js');
 
   btns.forEach((item) => {
     item.addEventListener('click', () => {
-      popupDesign.style.display = 'block';
-      document.body.style.paddingRight = '17px';
-      popupContent.classList.add('headShake');
-      popupContent.classList.add('animated');
-      document.body.style.overflow = 'hidden';
+      showModal(popupDesign,popupContent);
     });
 
     popupClose.addEventListener('click', () => {
-      popupDesign.style.display = 'none';
-      popupContent.classList.remove('headShake');
-      popupContent.classList.remove('animated');
-      document.body.style.paddingRight = '0';
-      document.body.style.overflow = '';
+      hideModal(popupDesign,popupContent);
     });
   });
 }

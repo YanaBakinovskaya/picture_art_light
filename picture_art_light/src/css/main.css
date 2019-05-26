@@ -873,7 +873,7 @@ h4 {
   position: absolute;
   bottom: -3rem;
   left: 15rem;
-  z-index: 1000000;
+  z-index: 1;
 }
 .feedback-block .button-order:before {
   content: '';
@@ -1749,4 +1749,8 @@ h4 {
     padding: 3rem 3rem;
     width: 25rem;
   }
+}
+.show-modal {
+  overflow: hidden;
+  padding-right: 17px;
 }

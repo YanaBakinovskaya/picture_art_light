@@ -11,8 +11,6 @@ window.addEventListener('DOMContentLoaded', function () {
   modalPopupConsltation();
   modalPopupGift();
 
-  let wow = document.querySelectorAll('.wow');
-  wow.forEach((item) => {
-    item.classList.add('animated');
-  });
+
+  
 });

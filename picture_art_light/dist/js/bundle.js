@@ -276,7 +276,7 @@ module.exports = showModal;
 window.addEventListener('DOMContentLoaded', function () {
   'use strict';
   let modalPopupDesign = __webpack_require__(/*! ./parts/modal-popup-design.js */ "./src/js/parts/modal-popup-design.js"),
-      modalPopupConsltation = __webpack_require__(/*! ./parts/modal-popup-consultation.js */ "./src/js/parts/modal-popup-consultation.js"),
+      modalPopupConsultation = __webpack_require__(/*! ./parts/modal-popup-consultation.js */ "./src/js/parts/modal-popup-consultation.js"),
       modalPopupGift = __webpack_require__(/*! ./parts/modal-popup-gift.js */ "./src/js/parts/modal-popup-gift.js"),
       filtration = __webpack_require__(/*! ./parts/filtration.js */ "./src/js/parts/filtration.js");
 
@@ -284,7 +284,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
   modalPopupDesign();
-  modalPopupConsltation();
+  modalPopupConsultation();
   modalPopupGift();
   filtration();
   

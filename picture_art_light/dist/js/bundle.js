@@ -178,6 +178,8 @@ function modalPopupGift() {
       showModal = __webpack_require__(/*! ./modal-show.js */ "./src/js/parts/modal-show.js"),
       hideModal = __webpack_require__(/*! ./modal-hide.js */ "./src/js/parts/modal-hide.js");
 
+  btn.classList.add('animated');
+  
   btn.addEventListener('click', () => {
     showModal(overlay,popup);
   });
@@ -229,7 +231,10 @@ window.addEventListener('DOMContentLoaded', function () {
   modalPopupConsltation();
   modalPopupGift();
 
-
+  let wow = document.querySelectorAll('.wow');
+  wow.forEach((item) => {
+    item.classList.add('animated');
+  });
 });
 
 /***/ })

@@ -6,6 +6,8 @@ function modalPopupGift() {
       showModal = require('./modal-show.js'),
       hideModal = require('./modal-hide.js');
 
+  btn.classList.add('animated');
+  
   btn.addEventListener('click', () => {
     showModal(overlay,popup);
   });

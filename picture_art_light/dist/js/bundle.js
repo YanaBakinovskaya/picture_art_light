@@ -102,6 +102,36 @@ module.exports = hideModal;
 
 /***/ }),
 
+/***/ "./src/js/parts/modal-popup-consultation.js":
+/*!**************************************************!*\
+  !*** ./src/js/parts/modal-popup-consultation.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+function modalPopupDesign() {
+  let btns = document.querySelectorAll('.button-consultation'),
+      popupDesign = document.querySelector('.popup-consultation'),
+      popupContent = document.querySelector('.popup-consultation .popup-content'),
+      popupClose = document.querySelector('.popup-consultation .popup-close'),
+      showModal = __webpack_require__(/*! ./modal-show.js */ "./src/js/parts/modal-show.js"),
+      hideModal = __webpack_require__(/*! ./modal-hide.js */ "./src/js/parts/modal-hide.js");
+
+  btns.forEach((item) => {
+    item.addEventListener('click', () => {
+      showModal(popupDesign,popupContent);
+    });
+
+    popupClose.addEventListener('click', () => {
+      hideModal(popupDesign,popupContent);
+    });
+  });
+}
+
+module.exports = modalPopupDesign;
+
+/***/ }),
+
 /***/ "./src/js/parts/modal-popup-design.js":
 /*!********************************************!*\
   !*** ./src/js/parts/modal-popup-design.js ***!
@@ -159,9 +189,13 @@ module.exports = showModal;
 //window.addEventListener('load');
 window.addEventListener('DOMContentLoaded', function () {
   'use strict';
-  let modalPopupDesign = __webpack_require__(/*! ./parts/modal-popup-design.js */ "./src/js/parts/modal-popup-design.js");
+  let modalPopupDesign = __webpack_require__(/*! ./parts/modal-popup-design.js */ "./src/js/parts/modal-popup-design.js"),
+      modalPopupConsltation = __webpack_require__(/*! ./parts/modal-popup-consultation.js */ "./src/js/parts/modal-popup-consultation.js");
+
 
   modalPopupDesign();
+  modalPopupConsltation();
+
 
 });
 

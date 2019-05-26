@@ -1,20 +1,20 @@
-function modalPopupDesign() {
+function modalPopupConsltation() {
   let btns = document.querySelectorAll('.button-consultation'),
-      popupDesign = document.querySelector('.popup-consultation'),
-      popupContent = document.querySelector('.popup-consultation .popup-content'),
+      overlay = document.querySelector('.popup-consultation'),
+      popup = document.querySelector('.popup-consultation .popup-content'),
       popupClose = document.querySelector('.popup-consultation .popup-close'),
       showModal = require('./modal-show.js'),
       hideModal = require('./modal-hide.js');
 
   btns.forEach((item) => {
     item.addEventListener('click', () => {
-      showModal(popupDesign,popupContent);
+      showModal(overlay,popup);
     });
 
     popupClose.addEventListener('click', () => {
-      hideModal(popupDesign,popupContent);
+      hideModal(overlay,popup);
     });
   });
 }
 
-module.exports = modalPopupDesign;
+module.exports = modalPopupConsltation;

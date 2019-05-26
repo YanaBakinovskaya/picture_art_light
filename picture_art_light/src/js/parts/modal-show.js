@@ -1,6 +1,6 @@
 function showModal(overlay, popup) {
-  overlay.style.display = 'block';
-  document.body.classList.add('show-modal');
+  overlay.classList.add('show-modal');
+  document.body.classList.add('show');
   popup.classList.add('headShake','animated');
 }
 module.exports = showModal;

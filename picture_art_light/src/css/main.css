@@ -104,7 +104,7 @@ h4 {
 }
 .fixed-gift {
   position: fixed;
-  z-index: 10000;
+  z-index: 10;
   display: inline;
   top: 4rem;
   right: 2rem;

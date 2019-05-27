@@ -162,13 +162,17 @@ function form() {
       input = document.getElementsByTagName('input'),
       statusMessage = document.createElement('div'),
       popupContentCons = document.querySelector('.popup-consultation .popup-content'),
-      popupContentDesign = document.querySelector('.popup-design .popup-content');
+      popupContentDesign = document.querySelector('.popup-design .popup-content'),
+      popupCloseCons = document.querySelector('.popup-consultation .popup-close'),
+      popupCloseDesign = document.querySelector('.popup-design .popup-close');
+
+      
 
     //проверка input tel
   for (let i = 0; i < input.length; i++) {
     if (input[i].getAttribute('name') == 'phone') {
       input[i].addEventListener('input', () => {
-        if (input[i].value[0] != '+' ) {
+        if (input[i].value[0] != '+') {
           input[i].value = '';
         } else {
          input[i].value = '+' + input[i].value.replace(/[^\d]/g, '');
@@ -177,13 +181,15 @@ function form() {
     }
   }
 
-  function init(formElem, popup) {
+  function init(formElem, popup, close) {
     formElem.addEventListener('submit', (e) => {
       e.preventDefault();
-      let formData = new FormData(formElem);
+      let formData = new FormData(formElem),
+          elem = popup.children[1],
+          obj = {};
+
       popup.appendChild(statusMessage);
-      let elem = popup.children[1];
-      let obj = {};
+
       formData.forEach((value, key, i) => {
         obj[key] = value;
       });
@@ -238,17 +244,21 @@ function form() {
           removeChild();
         })
         .then(() => {
-          clearInput();
-          setTimeout(() => {
+          //clearInput();
+          close.addEventListener('click', () => {
             statusMessage.remove();
             addChild();
-          }, 10000);
-
+            clearInput();
+          });
+          // setTimeout(() => {
+          //   statusMessage.remove();
+          //   addChild();
+          // }, 10000);
         });
     });
   }
-  init(formDesign, popupContentDesign);
-  init(formCons, popupContentCons);
+  init(formDesign, popupContentDesign, popupCloseDesign);
+  init(formCons, popupContentCons, popupCloseCons);
 
   
 }
@@ -381,6 +391,55 @@ module.exports = showModal;
 
 /***/ }),
 
+/***/ "./src/js/parts/slider.js":
+/*!********************************!*\
+  !*** ./src/js/parts/slider.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function slider() {
+  let slideIndex = 1,
+      slides = document.querySelectorAll('.feedback-slider-item'),
+      prev = document.querySelector('.main-prev-btn'),
+      next = document.querySelector('.main-next-btn');
+
+  showSlides(slideIndex);
+
+  function showSlides(n) {
+    if (n > slides.length) {
+      slideIndex = 1;
+    }
+    if (n < 1) {
+      slideIndex = slides.length;
+    }
+    slides.forEach((item) => item.style.display = 'none');
+    
+
+    slides[slideIndex - 1].style.display = 'block';
+  }
+
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+
+  prev.addEventListener('click', () => {
+    plusSlides(-1);
+  });
+
+  next.addEventListener('click', () => {
+    plusSlides(1);
+  });
+}
+
+module.exports = slider;
+
+/***/ }),
+
 /***/ "./src/js/script.js":
 /*!**************************!*\
   !*** ./src/js/script.js ***!
@@ -395,6 +454,7 @@ window.addEventListener('DOMContentLoaded', function () {
       modalPopupConsultation = __webpack_require__(/*! ./parts/modal-popup-consultation.js */ "./src/js/parts/modal-popup-consultation.js"),
       modalPopupGift = __webpack_require__(/*! ./parts/modal-popup-gift.js */ "./src/js/parts/modal-popup-gift.js"),
       filtration = __webpack_require__(/*! ./parts/filtration.js */ "./src/js/parts/filtration.js"),
+      slider = __webpack_require__(/*! ./parts/slider.js */ "./src/js/parts/slider.js"),
       form = __webpack_require__(/*! ./parts/form.js */ "./src/js/parts/form.js");
 
   modalPopupDesign();
@@ -402,6 +462,7 @@ window.addEventListener('DOMContentLoaded', function () {
   modalPopupGift();
   filtration();
   form();
+  slider();
 });
 
 /***/ })

@@ -12,13 +12,17 @@ function form() {
       input = document.getElementsByTagName('input'),
       statusMessage = document.createElement('div'),
       popupContentCons = document.querySelector('.popup-consultation .popup-content'),
-      popupContentDesign = document.querySelector('.popup-design .popup-content');
+      popupContentDesign = document.querySelector('.popup-design .popup-content'),
+      popupCloseCons = document.querySelector('.popup-consultation .popup-close'),
+      popupCloseDesign = document.querySelector('.popup-design .popup-close');
+
+      
 
     //проверка input tel
   for (let i = 0; i < input.length; i++) {
     if (input[i].getAttribute('name') == 'phone') {
       input[i].addEventListener('input', () => {
-        if (input[i].value[0] != '+' ) {
+        if (input[i].value[0] != '+') {
           input[i].value = '';
         } else {
          input[i].value = '+' + input[i].value.replace(/[^\d]/g, '');
@@ -27,13 +31,15 @@ function form() {
     }
   }
 
-  function init(formElem, popup) {
+  function init(formElem, popup, close) {
     formElem.addEventListener('submit', (e) => {
       e.preventDefault();
-      let formData = new FormData(formElem);
+      let formData = new FormData(formElem),
+          elem = popup.children[1],
+          obj = {};
+
       popup.appendChild(statusMessage);
-      let elem = popup.children[1];
-      let obj = {};
+
       formData.forEach((value, key, i) => {
         obj[key] = value;
       });
@@ -88,17 +94,21 @@ function form() {
           removeChild();
         })
         .then(() => {
-          clearInput();
-          setTimeout(() => {
+          //clearInput();
+          close.addEventListener('click', () => {
             statusMessage.remove();
             addChild();
-          }, 10000);
-
+            clearInput();
+          });
+          // setTimeout(() => {
+          //   statusMessage.remove();
+          //   addChild();
+          // }, 10000);
         });
     });
   }
-  init(formDesign, popupContentDesign);
-  init(formCons, popupContentCons);
+  init(formDesign, popupContentDesign, popupCloseDesign);
+  init(formCons, popupContentCons, popupCloseCons);
 
   
 }

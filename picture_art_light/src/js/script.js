@@ -5,6 +5,7 @@ window.addEventListener('DOMContentLoaded', function () {
       modalPopupConsultation = require('./parts/modal-popup-consultation.js'),
       modalPopupGift = require('./parts/modal-popup-gift.js'),
       filtration = require('./parts/filtration.js'),
+      slider = require('./parts/slider.js'),
       form = require('./parts/form.js');
 
   modalPopupDesign();
@@ -12,4 +13,5 @@ window.addEventListener('DOMContentLoaded', function () {
   modalPopupGift();
   filtration();
   form();
+  slider();
 });

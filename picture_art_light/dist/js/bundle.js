@@ -101,27 +101,28 @@ function accordion() {
 
   function hideTabContent(a) {
     for (let i = a; i < tabContent.length; i++) {
-      tabContent[i].classList.remove('show');
-      tabContent[i].classList.add('hide');
+      tabContent[i].classList.remove('ui-accordion-content-active');
     }
     for (let j = a; j < tab.length; j++) {
       tab[j].classList.remove('ui-accordion-header-active');
     }
   }
-  
-  hideTabContent(1);
   function showTabContent(b) {
-    if (tabContent[b].classList.contains('hide')) {
-      tabContent[b].classList.remove('hide');
-      tabContent[b].classList.add('show');
+    if (!tabContent[b].classList.contains('ui-accordion-content-active')) {
+      tabContent[b].classList.add('ui-accordion-content-active');
       tab[b].classList.add('ui-accordion-header-active');
     }
   }
  
   tab.forEach((item, i) => {
     item.addEventListener('click', () => {
-      hideTabContent(0);
-      showTabContent(i);
+      if (tab[i].classList.contains('ui-accordion-header-active')) {
+        tabContent[i].classList.remove('ui-accordion-content-active');
+        tab[i].classList.remove('ui-accordion-header-active');
+      } else {
+        hideTabContent(0);
+        showTabContent(i);
+      }
     });
   });
 }

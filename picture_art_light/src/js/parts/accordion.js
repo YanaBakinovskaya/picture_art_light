@@ -29,18 +29,6 @@ function accordion() {
       showTabContent(i);
     });
   });
-  // info.addEventListener('click', (e) => {
-  //   let target = e.target;
-  //   if (target && target.classList.contains('accordion-heading')) {
-  //     for (let i = 0; i < tab.length; i++) {
-  //       if (target == tab[i]) {
-  //         hideTabContent(0);
-  //         showTabContent(i);
-  //         break;
-  //       }
-  //     }
-  //   }
-  // });
 }
 
 module.exports = accordion;

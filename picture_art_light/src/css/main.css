@@ -1113,7 +1113,7 @@ h4 {
   transform: translateX(-50%) !important;
   padding: 4rem 6rem 5rem 6rem;
 }
-.popup-gift {
+.popup-gift, .popup-main {
   z-index: 20;
   position: fixed;
   display: none;

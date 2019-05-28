@@ -1,7 +1,6 @@
 function accordion() {
-  let info = document.querySelector('#accordion'),
-    tab = document.querySelectorAll('.accordion-heading'),
-    tabContent = document.querySelectorAll('.accordion-block');
+  let tab = document.querySelectorAll('.accordion-heading'),
+      tabContent = document.querySelectorAll('.accordion-block');
 
 
   function hideTabContent(a) {

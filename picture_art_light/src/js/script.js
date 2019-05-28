@@ -7,6 +7,7 @@ window.addEventListener('DOMContentLoaded', function () {
       filtration = require('./parts/filtration.js'),
       slider = require('./parts/slider.js'),
       form = require('./parts/form.js'),
+      accordion = require('./parts/accordion.js'),
       formMain = require('./parts/main-form.js');
 
   modalPopupDesign();
@@ -16,4 +17,5 @@ window.addEventListener('DOMContentLoaded', function () {
   form();
   formMain();
   slider();
+  accordion();
 });

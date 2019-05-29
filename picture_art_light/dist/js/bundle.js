@@ -130,6 +130,74 @@ module.exports = accordion;
 
 /***/ }),
 
+/***/ "./src/js/parts/calculation.js":
+/*!*************************************!*\
+  !*** ./src/js/parts/calculation.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function calc() {
+  // калькулятор
+  let size = document.getElementById('size'),
+    material = document.getElementById('material'),
+    options = document.getElementById('options'),
+    promocode = document.querySelector('.promocode'),
+    price = document.querySelector('.calc-price'),
+    sizePrice = 0,
+    materialPrice = 0,
+    optionsPrice = 0,
+    promo = 0,
+    defaultValue = price.innerHTML;
+
+  size.addEventListener('change', function () {
+    sizePrice = +this.value;
+    let sum = (sizePrice + materialPrice + optionsPrice) * (100 - promo) / 100;
+    if (materialPrice > 0 && !isNaN(sizePrice) && !isNaN(materialPrice)) {
+      price.innerHTML = sum;
+    } else {
+      price.innerHTML = defaultValue;
+    }
+  });
+
+  material.addEventListener('change', function () {
+    materialPrice = +this.value;
+    let sum = (sizePrice + materialPrice + optionsPrice) * (100 - promo) / 100;
+    if (sizePrice > 0 && !isNaN(sizePrice) && !isNaN(materialPrice)) {
+      price.innerHTML = sum;
+    } else {
+      price.innerHTML = defaultValue;
+    }
+  });
+
+  options.addEventListener('change', function () {
+    optionsPrice = +this.value;
+    if (isNaN(optionsPrice)) {
+      optionsPrice = 0;
+    }
+    let sum = (sizePrice + materialPrice + optionsPrice) * (100 - promo) / 100;
+    if (sizePrice > 0 && materialPrice > 0) {
+      price.innerHTML = sum;
+    }
+  });
+
+  promocode.addEventListener('input', function () {
+    if (this.value === 'IWANTPOPART') {
+      promo = 30;
+    } else {
+      promo = 0;
+    }
+    let sum = (sizePrice + materialPrice + optionsPrice) * (100 - promo) / 100;
+    if (sizePrice > 0 && materialPrice > 0) {
+      price.innerHTML = sum;
+    }
+  });
+}
+
+module.exports = calc;
+
+/***/ }),
+
 /***/ "./src/js/parts/filtration.js":
 /*!************************************!*\
   !*** ./src/js/parts/filtration.js ***!
@@ -605,7 +673,9 @@ window.addEventListener('DOMContentLoaded', function () {
       slider = __webpack_require__(/*! ./parts/slider.js */ "./src/js/parts/slider.js"),
       form = __webpack_require__(/*! ./parts/form.js */ "./src/js/parts/form.js"),
       accordion = __webpack_require__(/*! ./parts/accordion.js */ "./src/js/parts/accordion.js"),
-      formMain = __webpack_require__(/*! ./parts/main-form.js */ "./src/js/parts/main-form.js");
+      formMain = __webpack_require__(/*! ./parts/main-form.js */ "./src/js/parts/main-form.js"),
+      calc = __webpack_require__(/*! ./parts/calculation.js */ "./src/js/parts/calculation.js");
+
 
   modalPopupDesign();
   modalPopupConsultation();
@@ -615,6 +685,8 @@ window.addEventListener('DOMContentLoaded', function () {
   formMain();
   slider();
   accordion();
+  calc();
+
 });
 
 /***/ })

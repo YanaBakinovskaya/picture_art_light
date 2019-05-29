@@ -8,7 +8,9 @@ window.addEventListener('DOMContentLoaded', function () {
       slider = require('./parts/slider.js'),
       form = require('./parts/form.js'),
       accordion = require('./parts/accordion.js'),
-      formMain = require('./parts/main-form.js');
+      formMain = require('./parts/main-form.js'),
+      calc = require('./parts/calculation.js');
+
 
   modalPopupDesign();
   modalPopupConsultation();
@@ -18,4 +20,6 @@ window.addEventListener('DOMContentLoaded', function () {
   formMain();
   slider();
   accordion();
+  calc();
+
 });
